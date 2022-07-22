@@ -8,6 +8,7 @@
   "stms.menu.login": "Sign in",
   "stms.menu.logout": "Logout",
   "stms.menu.settings": "Settings",
+  "stms.menu.favourite": "Favourite",
 
   "stms.settings.animations.elements": "Navigation page elements slide up",
   "stms.settings.animations.page": "Navigation whole page transition",
@@ -28,7 +29,19 @@
 
   "stms.patients.title": "Patients",
   "stms.patients.get-patients": "Get patients",
+  "stms.patients.favourite-patients": "Favourite patients",
+  "stms.patients.no-favourite-patients": "There are no favourite patients",
+  "stms.patients.input-placeholder": "Type patient first name",
+  "stms.patients.input-label": "Patients filter",
 
   "stms.orders.title": "Orders",
-  "stms.orders.get-orders": "Get orders"
+  "stms.orders.get-orders": "Get orders",
+  "stms.orders.favourite-orders": "Favourite orders",
+  "stms.orders.no-favourite-orders": "There are no favourite orders",
+  "stms.orders.input-placeholder": "Type order number",
+  "stms.orders.input-label": "Orders filter",
+
+  "stms.table.add-to-favourite": "Add to favourite",
+  "stms.table.remove-from-favourite": "Remove from favourite"
+
 }

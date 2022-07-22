@@ -1,0 +1,13 @@
+table {
+  width: 100%;
+  margin-bottom: 20px;
+
+  .red-icon {
+    color: red;
+  }
+
+  a:hover {
+    color: red;
+    cursor: pointer;
+  }
+}

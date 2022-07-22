@@ -14,14 +14,12 @@
 @import 'styles-reset.scss-theme';
 @import './app/app-root/app-root.component.scss-theme';
 @import './app/shared/components/big-input/big-input/big-input.component.scss-theme';
-@import './app/features/patients/patients/patients.component.scss-theme';
 
 @include mat-core();
 
 @mixin custom-components-theme($theme) {
   @include st-styles-reset-theme($theme);
   @include st-app-root-component-theme($theme);
-  @include st-patients-component-theme($theme);
 }
 
 .default-theme {

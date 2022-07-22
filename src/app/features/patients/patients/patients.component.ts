@@ -1,6 +1,17 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 
-import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
+import { HttpService } from '../../../shared/services/http.service';
+import { Observable } from 'rxjs/internal/Observable';
+import { Patient } from '../../../shared/models/patient.model';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { DisplayColumnInterface } from '../../../shared/models/displayed-columns.interface';
+import { PATIENTS_DISPLAYED_COLUMNS } from "app/shared/constants/patients.constants";
+import { Store } from '@ngrx/store';
+import { addPatientToFavourite, setPatientsList } from '../../../core/patients/patients.actions';
+import { selectFavouritePatients, selectPatients } from '../../../core/patients/patients.selectors';
+import { selectOrders } from '../../../core/orders/orders.selectors';
+import { setOrdersList } from '../../../core/orders/orders.actions';
+import { of } from 'rxjs/internal/observable/of';
 
 @Component({
   selector: "st-patients",
@@ -8,10 +19,40 @@ import { ROUTE_ANIMATIONS_ELEMENTS } from "../../../core/core.module";
   styleUrls: ["./patients.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PatientsComponent implements OnInit {
-  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
+export class PatientsComponent {
+  patients$: Observable<ReadonlyArray<Patient>>;
+  displayedColumns: DisplayColumnInterface[] = PATIENTS_DISPLAYED_COLUMNS;
+  favouritePatientsSelector = selectFavouritePatients;
 
-  constructor() {}
+  constructor(private httpService: HttpService, private store: Store) {}
 
-  ngOnInit() {}
+  setPatients() {
+    this.patients$ = this.store.select(selectPatients).pipe(switchMap((patients) => {
+      if (patients.length) {
+        return of(patients)
+      } else {
+        return this.httpService.getPatients()
+          .pipe(
+            map(res => {
+              return res.patient.map(patient => {
+                patient.age = this.calculateAge(patient.birthDate.formattedDate);
+                return patient;
+              })
+            }),
+            tap(patients => this.store.dispatch(setPatientsList({patients})))
+          )
+      }
+    }))
+  }
+
+  addToFavourite({ defaultId }: Patient) {
+    this.store.dispatch(addPatientToFavourite({defaultId}))
+  }
+
+  calculateAge(birthday: string): number {
+    const ageDifMs = Date.now() - new Date(birthday).getTime();
+    const ageDate = new Date(ageDifMs);
+    const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+    return isNaN(age) ? null : age;
+  }
 }

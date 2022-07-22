@@ -1,0 +1,35 @@
+<div class="container">
+    <div rtl>
+        <h1 class="main-heading">{{ 'stms.menu.favourite' | translate }}</h1>
+            <mat-form-field appearance="standard">
+                <mat-label>{{ 'stms.patients.input-label' | translate }}</mat-label>
+                <input matInput (keyup)="filterPatients($event)" [placeholder]="'stms.patients.input-placeholder' | translate" #input>
+            </mat-form-field>
+
+            <h2>{{ 'stms.patients.favourite-patients' | translate}} </h2>
+            <st-table
+                [data]="patients"
+                [displayedColumns]="patientsDisplayedColumns"
+                [isFavouriteRoute]="true"
+                [emptyTableTitle]="'stms.patients.no-favourite-patients'"
+                [selector]="favouritePatientsSelector"
+                (onClickingFavouriteButton)="removeFromFavourite($event, 'patients')">
+            </st-table>
+
+            <mat-form-field appearance="standard">
+                <mat-label>{{ 'stms.orders.input-label' | translate }}</mat-label>
+                <input matInput (keyup)="filterOrders($event)" [placeholder]="'stms.orders.input-placeholder' | translate" #input>
+            </mat-form-field>
+
+            <h2> {{ 'stms.orders.favourite-orders' | translate }}</h2>
+            <st-table
+                [data]="orders"
+                [displayedColumns]="ordersDisplayedColumns"
+                [isFavouriteRoute]="true"
+                [emptyTableTitle]="'stms.orders.no-favourite-orders'"
+                [selector]="favoriteOrdersSelector"
+                (onClickingFavouriteButton)="removeFromFavourite($event, 'orders')"    >
+
+            </st-table>
+    </div>
+</div>

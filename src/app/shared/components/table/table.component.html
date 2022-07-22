@@ -1,0 +1,24 @@
+<table *ngIf="(data | async)?.length else noElements" mat-table [dataSource]="data" class="mat-elevation-z8">
+    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column.value">
+        <ng-container *ngIf="!isFavourite(column)">
+            <th mat-header-cell *matHeaderCellDef> {{column.title}} </th>
+            <td mat-cell *matCellDef="let element"> {{element[column.value]}} </td>
+        </ng-container>
+        <ng-container *ngIf="isFavourite(column)">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let element">
+                <a [matTooltip]="tooltipTitle | translate" matTooltipPosition="above"  (click)="addToFavourite(element)" [ngClass]="{'red-icon': (isFavouriteElement(element) | async) }">
+                    <i class='material-icons'>favorite</i>
+                </a>
+            </td>
+        </ng-container>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsValues"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsValues;"></tr>
+</table>
+
+<ng-template #noElements>
+    <p>
+        {{emptyTableTitle | translate}}
+    </p>
+</ng-template>

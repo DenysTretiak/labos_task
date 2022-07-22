@@ -14,11 +14,21 @@ import { authReducer } from './auth/auth.reducer';
 import { RouterStateUrl } from './router/router.state';
 import { settingsReducer } from './settings/settings.reducer';
 import { SettingsState } from './settings/settings.model';
+import { Order } from 'app/shared/models/order.model';
+import { ordersReducer } from './orders/oderds.reducer';
+import { favouriteOrdersReducer } from './orders/favourite-orders.reducer';
+import { patientsReducer } from './patients/patients.reducer';
+import { Patient } from 'app/shared/models/patient.model';
+import { favouritePatientsReducer } from './patients/favourite-patients.reducer';
 
 export const reducers: ActionReducerMap<AppState> = {
   auth: authReducer,
   settings: settingsReducer,
-  router: routerReducer
+  router: routerReducer,
+  orders: ordersReducer,
+  favouriteOrders: favouriteOrdersReducer,
+  patients: patientsReducer,
+  favouritePatients: favouritePatientsReducer
 };
 
 export const metaReducers: MetaReducer<AppState>[] = [
@@ -49,4 +59,8 @@ export interface AppState {
   auth: AuthState;
   settings: SettingsState;
   router: RouterReducerState<RouterStateUrl>;
+  orders: ReadonlyArray<Order>;
+  favouriteOrders: ReadonlyArray<string>;
+  patients: ReadonlyArray<Patient>;
+  favouritePatients: ReadonlyArray<string>;
 }

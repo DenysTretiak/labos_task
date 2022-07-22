@@ -50,6 +50,9 @@ import { faMediumM, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { BigInputComponent } from "./components/big-input/big-input/big-input.component";
 import { BigInputActionComponent } from "./components/big-input/big-input-action/big-input-action.component";
 import { RtlSupportDirective } from "./directives/rtl-support/rtl-support.directive";
+import { MatTableModule } from '@angular/material/table';
+import { TableComponent } from './components/table/table.component';
+import { HttpService } from './services/http.service';
 
 @NgModule({
   imports: [
@@ -73,13 +76,15 @@ import { RtlSupportDirective } from "./directives/rtl-support/rtl-support.direct
     MatSnackBarModule,
     MatSlideToggleModule,
     MatDividerModule,
+    MatTableModule,
 
     FontAwesomeModule
   ],
   declarations: [
     BigInputComponent,
     BigInputActionComponent,
-    RtlSupportDirective
+    RtlSupportDirective,
+    TableComponent
   ],
   exports: [
     CommonModule,
@@ -106,13 +111,16 @@ import { RtlSupportDirective } from "./directives/rtl-support/rtl-support.direct
     MatSliderModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTableModule,
 
     FontAwesomeModule,
 
     BigInputComponent,
     BigInputActionComponent,
-    RtlSupportDirective
-  ]
+    RtlSupportDirective,
+    TableComponent
+  ],
+  providers: [HttpService]
 })
 export class SharedModule {
   constructor(faIconLibrary: FaIconLibrary) {
