@@ -11,8 +11,9 @@
                 [data]="patients"
                 [displayedColumns]="patientsDisplayedColumns"
                 [isFavouriteRoute]="true"
-                [emptyTableTitle]="'stms.patients.no-favourite-patients'"
+                emptyTableTitle="stms.patients.no-favourite-patients"
                 [selector]="favouritePatientsSelector"
+                tooltipTitle="stms.table.remove-from-favourite"
                 (onClickingFavouriteButton)="removeFromFavourite($event, 'patients')">
             </st-table>
 
@@ -28,6 +29,7 @@
                 [isFavouriteRoute]="true"
                 [emptyTableTitle]="'stms.orders.no-favourite-orders'"
                 [selector]="favoriteOrdersSelector"
+                tooltipTitle="stms.table.remove-from-favourite"
                 (onClickingFavouriteButton)="removeFromFavourite($event, 'orders')"    >
 
             </st-table>

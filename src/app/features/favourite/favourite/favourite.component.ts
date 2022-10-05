@@ -43,8 +43,8 @@ export class FavouriteComponent {
 
   filterElements(elementsTitle: string, selector: MemoizedSelector<any, any>, filterField: string, event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    this[elementsTitle] = this.store.select(selector).pipe(map((elements: any[]) => {
+    this[elementsTitle].pipe(map((elements: any[]) => {
       return elements.filter((order) => order[filterField].toLowerCase().includes(filterValue.trim().toLowerCase()))
-    }));
+    })).subscribe();
   }
 }

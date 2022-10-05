@@ -14,6 +14,7 @@ export class TableComponent implements OnInit {
   @Input() data: Observable<any[]>;
   @Input() displayedColumns;
   @Input() isFavouriteRoute: boolean;
+  @Input() tooltipTitle: string;
   @Input() emptyTableTitle: string;
   @Input() selector: any;
   @Output() onClickingFavouriteButton: EventEmitter<any> = new EventEmitter<any>();
@@ -25,9 +26,9 @@ export class TableComponent implements OnInit {
     this.displayedColumnsValues = this.displayedColumns.map(column => column.value)
   }
 
-  get tooltipTitle(): string {
-    return this.isFavouriteRoute ? 'stms.table.remove-from-favourite' : 'stms.table.add-to-favourite';
-  }
+//  get tooltipTitle(): string {
+//    return this.isFavouriteRoute ? 'stms.table.remove-from-favourite' : 'stms.table.add-to-favourite';
+//  }
 
   addToFavourite(element: any) {
     this.onClickingFavouriteButton.emit(element)
